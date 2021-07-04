@@ -8,10 +8,9 @@ namespace StatSystem.TakeOne
     [Serializable]
     public class HealthSystem
     {
-        [SerializeField] private StatsSystemBehaviour statsSys = default;
-        
         public event Action onDeathEvent = delegate { };
-        
+
+        private StatsSystem statsSys = default;
         private DownTimer healTimer = default;
         private StatBase maxHealthStat = default;
         private StatBase vigorStat = default;
@@ -22,15 +21,27 @@ namespace StatSystem.TakeOne
         
         public int CurHealth => curHealth;
 
-        private HealthSystem()
+        private HealthSystem(StatsSystem statsSys)
         {
-            maxHealthStat = statsSys.GetStat(StatTypeDB.GetType("MaxHealth"));
-            vigorStat = statsSys.GetStat(StatTypeDB.GetType("Vigor"));
-            resolveStat = statsSys.GetStat(StatTypeDB.GetType("Resolve"));
+            Init(statsSys);
+        }
+
+        public void Init(StatsSystem statsSys)
+        {
+            this.statsSys = statsSys;
+            
+            maxHealthStat = this.statsSys.GetStat(StatTypeDB.GetType("MaxHealth"));
+            vigorStat = this.statsSys.GetStat(StatTypeDB.GetType("Vigor"));
+            resolveStat = this.statsSys.GetStat(StatTypeDB.GetType("Resolve"));
             
             curHealth = maxHealthStat.ActualValue;
-            healTimer = new DownTimer(1f / vigorStat.ActualValue);
+            
+            InitAutoHealTimer();
+        }
 
+        private void InitAutoHealTimer()
+        {
+            healTimer = new DownTimer(1f / vigorStat.ActualValue);
             healTimer.OnTimerEnd += () => healTimer.SetTimer(1f / vigorStat.ActualValue);
             healTimer.OnTimerEnd += () => Heal(resolveStat.ActualValue, this);
             healTimer.OnTimerEnd += () => healTimer.Reset();

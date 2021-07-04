@@ -1,11 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 using WizardGame.Timers;
 
 namespace StatSystem.TakeOne
 {
-    public class TimerTickerGameObjectSingleton : InheritableGameObjectSingleton<TimerTickerGameObjectSingleton>
+    public class TimerTickerSingleton : InheritableSingleton<TimerTickerSingleton>
     {
         private readonly List<ITimer> timers = new List<ITimer>();
 

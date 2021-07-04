@@ -1,7 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Text;
-using UnityEngine;
 
 #pragma warning disable 0649
 namespace StatSystem.TakeOne

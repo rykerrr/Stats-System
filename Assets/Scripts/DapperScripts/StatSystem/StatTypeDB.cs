@@ -1,8 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Reflection;
 using UnityEngine;
 
 namespace StatSystem.TakeOne
@@ -22,6 +19,19 @@ namespace StatSystem.TakeOne
             }
         }
 
-        public static StatType GetType(string typeName) => types?[typeName];
+        public static StatType GetType(string typeName)
+        {
+            if (!types.ContainsKey(typeName))
+            {
+                #if UNITY_EDITOR
+                    Debug.LogWarning("StatType wasn't loaded." +
+                                     " Perhaps it doesn't exist in the folder?");
+                #endif
+
+                return null;
+            }
+            
+            return types[typeName];
+        }
     }
 }

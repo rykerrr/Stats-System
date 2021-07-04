@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 #pragma warning disable 0649
@@ -13,6 +14,7 @@ namespace StatSystem.TakeOne
         {
             get
             {
+                // Keep this despite the fact it's sorting a SO?
                 defaultTypes.Sort(ReturnBaseStatFirst);
 
                 return defaultTypes;
@@ -33,9 +35,9 @@ namespace StatSystem.TakeOne
         
         private int ReturnBaseStatFirst(StatType x, StatType y)
         {
-            var a = x.GetType() == typeof(BaseStatType) ? 1 : 0;
-            var b = x.GetType() == typeof(BaseStatType) ? 1 : 0;
-
+            var a = x.GetType() == typeof(DependantStatType) ? 1 : -1;
+            var b = y.GetType() == typeof(DependantStatType) ? 1 : -1;
+            
             return a - b;
         }
     }

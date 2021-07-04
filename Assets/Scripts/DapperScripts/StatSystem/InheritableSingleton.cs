@@ -1,14 +1,13 @@
-﻿using System;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace StatSystem.TakeOne
 {
-    public class InheritableGameObjectSingleton<T> : MonoBehaviour where T: MonoBehaviour
+    public class InheritableSingleton<T> : MonoBehaviour where T: MonoBehaviour
     {
-        protected static T instance = default;
+        private static T instance = default;
 
-        protected static object lockObj = new object();
-        protected static bool shuttingDown = false;
+        private static object lockObj = new object();
+        private static bool shuttingDown = false;
 
         public static T Instance
         {

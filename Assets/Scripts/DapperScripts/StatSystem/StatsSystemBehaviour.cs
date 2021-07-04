@@ -1,6 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
+using WizardGame.Timers;
 
 #pragma warning disable 0649
 namespace StatSystem.TakeOne
@@ -10,41 +9,42 @@ namespace StatSystem.TakeOne
         [SerializeField] public EntityStats statsToInject = default;
         [SerializeField] private StatsSystem statsSystem = default;
 
-        private StatsSystem StatsSystem => statsSystem ?? (statsSystem = new StatsSystem(statsToInject));
-        private List<TimedStatModifier> timedModifiers = new List<TimedStatModifier>();
+        public StatsSystem StatsSystem => statsSystem ?? (statsSystem = new StatsSystem(statsToInject
+                                                                    , TimerTickerSingleton.Instance));
 
         private void Awake()
         {
             StatsSystem.Init(statsToInject);
+            
+            DebugTextDump();
         }
 
-        private void Update()
-        {
-            for (int i = timedModifiers.Count - 1; i >= 0; i--)
-            {
-                timedModifiers[i].Tick(Time.deltaTime);
-            }
-        }
-
-        public void AddTimedModifier(StatType statType, StatModifier modifier, float time)
-        {
-            var timedModifier = new TimedStatModifier(modifier, time);
-            
-            timedModifier.Timer.OnTimerEnd += () => RemoveModifier(statType, modifier);
-            timedModifier.Timer.OnTimerEnd += () => timedModifiers.Remove(timedModifier);
-            
-            timedModifiers.Add(timedModifier);
-        }
+        // public void AddTimedModifier(StatType statType, StatModifier statModifier, float time)
+        // {
+        //     var timeTicker = TimerTickerSingleton.Instance;
+        //     Debug.Log(timeTicker, TimerTickerSingleton.Instance);
+        //     
+        //     DownTimer newTimer = new DownTimer(time);
+        //
+        //     timeTicker.Timers.Add(newTimer);
+        //     AddModifier(statType, statModifier);
+        //
+        //     newTimer.OnTimerEnd += () => RemoveModifier(statType, statModifier);
+        //     newTimer.OnTimerEnd += () => timeTicker.RemoveTimer(newTimer);
+        // } 
         
-        public void AddModifier(StatType statType, StatModifier modifier)
-            => StatsSystem.AddModifierTo(statType, modifier);
-
-        public bool RemoveModifier(StatType statType, StatModifier modifier)
-            => StatsSystem.RemoveModifierFrom(statType, modifier);
-            
-        public int RemoveModifiersFromSource(StatType statType, object source)
-            => StatsSystem.RemoveModifierFromSource(statType, source);
-
+        // public void AddModifier(StatType statType, StatModifier modifier)
+        //     => StatsSystem.AddModifierTo(statType, modifier);
+        //
+        // public bool RemoveModifier(StatType statType, StatModifier modifier)
+        //     => StatsSystem.RemoveModifierFrom(statType, modifier);
+        //     
+        // public int RemoveModifiersFromSource(StatType statType, object source)
+        //     => StatsSystem.RemoveModifierFromSource(statType, source);
+        //
+        // public StatBase GetStat(StatType statType)
+        //     => StatsSystem.GetStat(statType);
+        
         #region Debug things
 
         [SerializeField] private StatType key;

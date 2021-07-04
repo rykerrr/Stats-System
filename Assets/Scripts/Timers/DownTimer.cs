@@ -4,6 +4,8 @@ namespace WizardGame.Timers
 {
     public class DownTimer : BaseTimer
     {
+        private float defaultTime = default;
+        
         public DownTimer(float time)
         {
             SetTimer(time);
@@ -11,7 +13,8 @@ namespace WizardGame.Timers
 
         public void SetTimer(float time)
         {
-            Time = Mathf.Max(time, 0);
+            defaultTime = Mathf.Max(time, 0);
+            Time = defaultTime;
         }
 
         public override bool TryTick(float deltaTime)
@@ -26,6 +29,11 @@ namespace WizardGame.Timers
             if(Time == 0) OnTimerEnd?.Invoke();
             
             return true;
+        }
+
+        public override void Reset()
+        {
+            Time = defaultTime;
         }
     }
 }

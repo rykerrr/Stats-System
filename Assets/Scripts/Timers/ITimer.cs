@@ -1,4 +1,6 @@
-﻿namespace WizardGame.Timers
+﻿using System;
+
+namespace WizardGame.Timers
 {
     public interface ITimer
     {
@@ -8,5 +10,6 @@
         bool TryTick(float deltaTime);
         void EnableTimer();
         void DisableTimer();
+        void Reset();
     }
 }
