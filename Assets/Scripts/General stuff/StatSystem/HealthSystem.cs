@@ -45,7 +45,6 @@ namespace StatSystem.TakeOne
             healTimer.OnTimerEnd += () => healTimer.SetTimer(1f / vigorStat.ActualValue);
             healTimer.OnTimerEnd += () => Heal(resolveStat.ActualValue, this);
             healTimer.OnTimerEnd += () => healTimer.Reset();
-            healTimer.OnTimerEnd += () => Debug.Log("Bonk!");
         }
 
         public void Tick()

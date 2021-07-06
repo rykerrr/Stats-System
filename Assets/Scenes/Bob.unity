@@ -308,8 +308,9 @@ GameObject:
   m_Component:
   - component: {fileID: 1637122227}
   - component: {fileID: 1637122226}
-  - component: {fileID: 1637122228}
+  - component: {fileID: 1637122230}
   - component: {fileID: 1637122229}
+  - component: {fileID: 1637122228}
   m_Layer: 0
   m_Name: Plr
   m_TagString: Untagged
@@ -383,3 +384,21 @@ MonoBehaviour:
   statsSysBehaviour: {fileID: 1637122226}
   healthSystem:
     curHealth: 0
+--- !u!114 &1637122230
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1637122225}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e951011ce6684de3bd3fa8229a934013, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  statsSystem: {fileID: 1637122226}
+  statTypesToGrow:
+  - {fileID: 11400000, guid: faea2fb0e0f5dd943b81c6fe39e150e1, type: 2}
+  - {fileID: 11400000, guid: c12a3daaef016ca448021bbc27b3b0cd, type: 2}
+  - {fileID: 11400000, guid: 0baed2028f5ce64469f3d7c637b3aff3, type: 2}
+  expToGive: 40

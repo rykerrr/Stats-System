@@ -12,8 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 06d0c68ace6700540b1fdd985613e4d0, type: 3}
   m_Name: Mana
   m_EditorClassIdentifier: 
-  statsDependingOn:
-  - {fileID: 11400000, guid: e1d0d8bd835ac9d449a08d07e0daeb62, type: 2}
-  - {fileID: 11400000, guid: 0baed2028f5ce64469f3d7c637b3aff3, type: 2}
   name: Mana
+  statsDependingOn:
+  - name: Intelligence
+    statDependingOn: {fileID: 11400000, guid: e1d0d8bd835ac9d449a08d07e0daeb62, type: 2}
+    statMultiplier: 1.4
+  - name: Wisdom
+    statDependingOn: {fileID: 11400000, guid: 0baed2028f5ce64469f3d7c637b3aff3, type: 2}
+    statMultiplier: 1.3
   value: 50

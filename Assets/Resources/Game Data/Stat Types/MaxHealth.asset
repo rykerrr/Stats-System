@@ -13,6 +13,8 @@ MonoBehaviour:
   m_Name: MaxHealth
   m_EditorClassIdentifier: 
   statsDependingOn:
-  - {fileID: 11400000, guid: c12a3daaef016ca448021bbc27b3b0cd, type: 2}
+  - name: 
+    statDependingOn: {fileID: 11400000, guid: c12a3daaef016ca448021bbc27b3b0cd, type: 2}
+    statMultiplier: 1
   name: MaxHealth
   value: 300

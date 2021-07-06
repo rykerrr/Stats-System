@@ -12,7 +12,7 @@ namespace StatSystem.TakeOne
 
         private StringBuilder sb = new StringBuilder();
 
-        public DependantStat(StatType defType) : base(defType)
+        public DependantStat(StatType defType, float growthRate) : base(defType, growthRate)
         {
         }
         
@@ -39,20 +39,20 @@ namespace StatSystem.TakeOne
             return value;
         }
 
-        public void AddStatDependency(StatBase statToAdd)
+        public void AddStatDependency(StatBase statToAdd, float multiplier)
         {
             var statInDepList = StatsDependingOn.Find(x => x.StatDependingOn == statToAdd);
             var createNewStatDep = ReferenceEquals(statInDepList, null);
             
             if (createNewStatDep)
             {
-                var statDep = new StatDependency(statToAdd, default);
+                var statDep = new StatDependency(statToAdd, multiplier);
                 isDirty = true;
 
                 StatsDependingOn.Add(statDep);
+                
+                statToAdd.StatWasModified += DependenciesWereModified;
             }
-            
-            statToAdd.StatWasModified += DependenciesWereModified;
         }
 
         public bool RemoveStatDependency(StatBase statToRemove)

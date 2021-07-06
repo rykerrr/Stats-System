@@ -3,7 +3,7 @@ namespace StatSystem.TakeOne
 {
     public class Stat : StatBase
     {
-        public Stat(StatType defType) : base(defType)
+        public Stat(StatType defType, float growthRate) : base(defType, growthRate)
         {
             
         }

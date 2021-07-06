@@ -19,33 +19,7 @@ namespace StatSystem.TakeOne
             DebugTextDump();
         }
 
-        // public void AddTimedModifier(StatType statType, StatModifier statModifier, float time)
-        // {
-        //     var timeTicker = TimerTickerSingleton.Instance;
-        //     Debug.Log(timeTicker, TimerTickerSingleton.Instance);
-        //     
-        //     DownTimer newTimer = new DownTimer(time);
-        //
-        //     timeTicker.Timers.Add(newTimer);
-        //     AddModifier(statType, statModifier);
-        //
-        //     newTimer.OnTimerEnd += () => RemoveModifier(statType, statModifier);
-        //     newTimer.OnTimerEnd += () => timeTicker.RemoveTimer(newTimer);
-        // } 
-        
-        // public void AddModifier(StatType statType, StatModifier modifier)
-        //     => StatsSystem.AddModifierTo(statType, modifier);
-        //
-        // public bool RemoveModifier(StatType statType, StatModifier modifier)
-        //     => StatsSystem.RemoveModifierFrom(statType, modifier);
-        //     
-        // public int RemoveModifiersFromSource(StatType statType, object source)
-        //     => StatsSystem.RemoveModifierFromSource(statType, source);
-        //
-        // public StatBase GetStat(StatType statType)
-        //     => StatsSystem.GetStat(statType);
-        
-        #region Debug things
+        #region Debug
 
         [SerializeField] private StatType key;
         [SerializeField] private StatModifier modifierToAddOrRemove;

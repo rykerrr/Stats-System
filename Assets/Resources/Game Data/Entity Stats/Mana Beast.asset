@@ -12,10 +12,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e9a6c3860a9535a40bda2a0d21c056ce, type: 3}
   m_Name: Mana Beast
   m_EditorClassIdentifier: 
-  defaultTypes:
-  - {fileID: 11400000, guid: e1d0d8bd835ac9d449a08d07e0daeb62, type: 2}
-  - {fileID: 11400000, guid: 0baed2028f5ce64469f3d7c637b3aff3, type: 2}
-  - {fileID: 11400000, guid: c12a3daaef016ca448021bbc27b3b0cd, type: 2}
-  - {fileID: 11400000, guid: 948922a64131a984c81783a7d700b35b, type: 2}
-  - {fileID: 11400000, guid: 41a576c8368bdb04993cd8256d036876, type: 2}
-  - {fileID: 11400000, guid: faea2fb0e0f5dd943b81c6fe39e150e1, type: 2}
+  defaultEntityStats:
+  - name: Intelligence
+    statType: {fileID: 11400000, guid: e1d0d8bd835ac9d449a08d07e0daeb62, type: 2}
+    growthRate: 1
+  - name: Vigor
+    statType: {fileID: 11400000, guid: c12a3daaef016ca448021bbc27b3b0cd, type: 2}
+    growthRate: 1
+  - name: Wisdom
+    statType: {fileID: 11400000, guid: 0baed2028f5ce64469f3d7c637b3aff3, type: 2}
+    growthRate: 1
+  - name: Resolve
+    statType: {fileID: 11400000, guid: faea2fb0e0f5dd943b81c6fe39e150e1, type: 2}
+    growthRate: 1
+  - name: MaxHealth
+    statType: {fileID: 11400000, guid: 41a576c8368bdb04993cd8256d036876, type: 2}
+    growthRate: 1
+  - name: Mana
+    statType: {fileID: 11400000, guid: 948922a64131a984c81783a7d700b35b, type: 2}
+    growthRate: 1

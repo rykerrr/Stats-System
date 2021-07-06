@@ -6,19 +6,26 @@ namespace StatSystem.TakeOne
 {
     public abstract class StatBase
     {
-        protected List<StatModifier> modifiers = new List<StatModifier>();
-        protected int baseValue = default;
-
-        public IReadOnlyList<StatModifier> Modifiers => modifiers.AsReadOnly();
-
         protected Action statWasModified = delegate { };
 
+        protected List<StatModifier> modifiers = new List<StatModifier>();
+        
+        protected int baseValue = default;
+        protected float growthRate = default;
+        protected int actualValue = default;
+        protected bool isDirty = true;
+        
+        public IReadOnlyList<StatModifier> Modifiers => modifiers.AsReadOnly();
+        
         public Action StatWasModified
         {
             get => statWasModified;
             set => statWasModified = value;
         }
 
+        // Can be made private
+        // TODO: look at why it was kept as public though my only assumption is that it's for the level system
+        // and we don't need that setup anymore
         public int BaseValue
         {
             get => baseValue;
@@ -31,8 +38,7 @@ namespace StatSystem.TakeOne
             }
         }
 
-        protected int actualValue = default;
-        protected bool isDirty = true;
+        public float GrowthRate => growthRate;
 
         public int ActualValue
         {
@@ -49,10 +55,15 @@ namespace StatSystem.TakeOne
         }
 
         public bool IsDirty => isDirty;
+        protected int OriginalValue { get; }
 
-        public StatBase(StatType defType)
+
+        public StatBase(StatType defType, float growthRate)
         {
             baseValue = defType.Value;
+            OriginalValue = defType.Value;
+            
+            this.growthRate = growthRate;
         }
 
         protected int ApplyModifiers(int valueToApplyTo)
@@ -98,6 +109,11 @@ namespace StatSystem.TakeOne
 
         public abstract int CalculateValue();
 
+        public void GrowByGrowthRate()
+        {
+            BaseValue += Mathf.RoundToInt(OriginalValue * GrowthRate);
+        }
+        
         public void AddModifier(StatModifier mod)
         {
             isDirty = true;

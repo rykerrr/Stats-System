@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Linq;
 using System.Text;
+using System.Collections.Generic;
 using UnityEngine;
 using StatSystem.SerializableTypes;
 using WizardGame.Timers;
@@ -34,66 +35,51 @@ namespace StatSystem.TakeOne
 
         private void InitializeStats(EntityStats entityToLoad)
         {
-            var defStatList = entityToLoad.DefaultTypes;
+            var defEntityStatList = entityToLoad.DefaultEntityStats;
             var firstDepIndex = entityToLoad.FirstDepStatIndex;
 
             for (int i = 0; i < firstDepIndex; i++)
             {
-                stats.Add(defStatList[i], new Stat(defStatList[i]));
+                var entStat = defEntityStatList[i];
+                
+                stats.Add(entStat.StatType, new Stat(entStat.StatType, entStat.GrowthRate));
             }
 
-            for (int i = firstDepIndex; i < defStatList.Count; i++)
+            for (int i = firstDepIndex; i < defEntityStatList.Count; i++)
             {
-                Debug.Log(defStatList[i] + " | " + defStatList[firstDepIndex]);
-                var depStatBase = (DependantStatType) defStatList[i];
-                var depStat = CreateDependantStat(depStatBase);
+                // Debug.Log(defEntityStatList[i] + " | " + defEntityStatList[firstDepIndex]);
+                
+                var entityStat = defEntityStatList[i];
+                var depStat = CreateDependantStat(entityStat, defEntityStatList);
 
-                stats.Add(depStatBase, depStat);
+                stats.Add(entityStat.StatType, depStat);
             }
         }
 
-        private DependantStat CreateDependantStat(DependantStatType depStatBase)
+        private DependantStat CreateDependantStat(EntityStat entityStat, List<EntityStat> listForGrowthRates)
         {
-            DependantStat depStat = new DependantStat(depStatBase);
+            var depStatBase = (DependantStatType)entityStat.StatType;
+            DependantStat depStat = new DependantStat(depStatBase, entityStat.GrowthRate);
 
-            foreach (var statDepType in depStatBase.StatsDependingOn)
+            foreach (var statTypeDep in depStatBase.StatsDependingOn)
             {
-                if (stats.ContainsKey(statDepType))
+                if (stats.ContainsKey(statTypeDep.StatDependingOn))
                 {
-                    depStat.AddStatDependency(stats[statDepType]);
+                    depStat.AddStatDependency(stats[statTypeDep.StatDependingOn], statTypeDep.StatMultiplier);
                 }
                 else
                 {
-                    // But it could be a DependantStat too...
-                    StatBase statDependency = new Stat(depStatBase);
+                    // could probably be done in a much better way
+                    // i need the growth rates here of the stats the DependantStat is depending on
+                    float depStatGrowthRate = listForGrowthRates.Find(x => x.StatType == depStatBase).GrowthRate;
+                    StatBase statDependency = new Stat(depStatBase, depStatGrowthRate);
 
-                    stats.Add(statDepType, statDependency);
-                    depStat.AddStatDependency(statDependency);
+                    stats.Add(statTypeDep.StatDependingOn, statDependency);
+                    depStat.AddStatDependency(statDependency, statTypeDep.StatMultiplier);
                 }
             }
 
             return depStat;
-        }
-
-        private StatBase CreateStat(StatType statType)
-        {
-            StatBase retStat = default;
-
-            switch (statType)
-            {
-                case BaseStatType baseType:
-                {
-                    retStat = new Stat(baseType);
-                    break;
-                }
-                case DependantStatType dependantType:
-                {
-                    retStat = CreateDependantStat(dependantType);
-                    break;
-                }
-            }
-
-            return retStat;
         }
 
         public StatBase GetStat(StatType statType)
@@ -101,15 +87,19 @@ namespace StatSystem.TakeOne
             if (!Stats.ContainsKey(statType))
             {
                 #if UNITY_EDITOR
-                                Debug.LogWarning("StatType doesn't exist in the stats system. " +
-                                                 "Perhaps it's not on the Entity or there has been a problem with " +
-                                                 "loading the stats system?");
+                    // Debug.Log(statType);
+                    // Debug.Log(Stats);
+                    // Debug.Log(Stats.Count);
+                    // Debug.Log(Stats.ContainsKey(statType));
+                    Debug.LogWarning("StatType doesn't exist in the stats system. " +
+                                             "Perhaps it's not on the Entity or there has been a problem with " +
+                                             "loading the stats system?");
                 #endif
 
                 return null;
             }
             
-            return Stats?[statType];
+            return Stats[statType];
         }
         
         public void AddModifierTo(StatType statType, StatModifier modifierToAdd)

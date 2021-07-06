@@ -9,7 +9,11 @@ namespace StatSystem.TakeOne
         [SerializeField] private new string name = default;
         [SerializeField] private int value = default;
 
-        public override string Name => name;
+        public override string Name
+        {
+            get => name;
+            protected set => name = value;
+        }
         public override int Value => value;
         
         public override string ToString()

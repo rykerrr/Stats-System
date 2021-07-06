@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e9a6c3860a9535a40bda2a0d21c056ce, type: 3}
+  m_Name: Big Chungus
+  m_EditorClassIdentifier: 
+  defaultEntityStats:
+  - name: MaxHealth
+    statType: {fileID: 11400000, guid: 41a576c8368bdb04993cd8256d036876, type: 2}
+    growthRate: 1
+  - name: Vigor
+    statType: {fileID: 11400000, guid: c12a3daaef016ca448021bbc27b3b0cd, type: 2}
+    growthRate: 1
