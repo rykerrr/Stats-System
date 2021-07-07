@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e9a6c3860a9535a40bda2a0d21c056ce, type: 3}
   m_Name: Mana Beast
   m_EditorClassIdentifier: 
+  lifeValueExpMultiplier: 1
   defaultEntityStats:
   - name: Intelligence
     statType: {fileID: 11400000, guid: e1d0d8bd835ac9d449a08d07e0daeb62, type: 2}

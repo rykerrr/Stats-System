@@ -28,13 +28,10 @@ namespace StatSystem.TakeOne
             
             foreach (var statDep in StatsDependingOn)
             {
-                value += statDep.StatDependingOn.ActualValue;
-                // Debug.Log("Step 1: " + statDep.StatDependingOn.ActualValue);
+                value += (int)(statDep.StatDependingOn.ActualValue * statDep.StatMultiplier);
             }
             
-            // Debug.Log("Step 2: " + value);
             value = ApplyModifiers(value);
-            // Debug.Log("Step 3: " + value);
             
             return value;
         }

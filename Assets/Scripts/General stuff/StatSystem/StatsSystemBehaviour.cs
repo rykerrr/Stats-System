@@ -1,5 +1,4 @@
 ﻿using UnityEngine;
-using WizardGame.Timers;
 
 #pragma warning disable 0649
 namespace StatSystem.TakeOne
@@ -7,18 +6,15 @@ namespace StatSystem.TakeOne
     public class StatsSystemBehaviour : MonoBehaviour
     {
         [SerializeField] public EntityStats statsToInject = default;
-        [SerializeField] private StatsSystem statsSystem = default;
+        
+        private StatsSystem statsSystem = default;
 
         public StatsSystem StatsSystem => statsSystem ?? (statsSystem = new StatsSystem(statsToInject
                                                                     , TimerTickerSingleton.Instance));
 
-        private void Awake()
-        {
-            StatsSystem.Init(statsToInject);
-            
-            DebugTextDump();
-        }
+        public EntityStats Entity => statsToInject;
 
+        [Space(10), Header("Debug"), Space(10)]
         #region Debug
 
         [SerializeField] private StatType key;

@@ -9,8 +9,11 @@ namespace StatSystem.TakeOne
     [CreateAssetMenu(fileName = "New Entity Stats", menuName = "Stats/Entity Stats")]
     public class EntityStats : ScriptableObject
     {
+        [SerializeField] private float lifeValueExpMultiplier = 1;
         [SerializeField] private List<EntityStat> defaultEntityStats = new List<EntityStat>();
 
+        public float LifeValueExpMultiplier => lifeValueExpMultiplier;
+        
         public List<EntityStat> DefaultEntityStats
         {
             get

@@ -87,13 +87,9 @@ namespace StatSystem.TakeOne
             if (!Stats.ContainsKey(statType))
             {
                 #if UNITY_EDITOR
-                    // Debug.Log(statType);
-                    // Debug.Log(Stats);
-                    // Debug.Log(Stats.Count);
-                    // Debug.Log(Stats.ContainsKey(statType));
                     Debug.LogWarning("StatType doesn't exist in the stats system. " +
-                                             "Perhaps it's not on the Entity or there has been a problem with " +
-                                             "loading the stats system?");
+                                     "Perhaps it's not on the Entity or there has been a problem with " +
+                                     "loading the stats system?");
                 #endif
 
                 return null;

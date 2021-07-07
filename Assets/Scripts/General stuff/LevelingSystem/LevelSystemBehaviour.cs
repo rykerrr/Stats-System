@@ -15,18 +15,47 @@ namespace DapperScripts.LevelingSystem
         public LevelSystem LevelSystem => levelSystem ?? (levelSystem = new LevelSystem(
             0, statsSystem.StatsSystem, GetRequiredStatsFromStatTypes()));
 
+        private void Awake()
+        {
+            // LevelSystem.Init(0, statsSystem.StatsSystem, GetRequiredStatsFromStatTypes());
+            
+            var healthSysBehaviour = GetComponent<HealthSystemBehaviour>();
+
+            healthSysBehaviour.HealthSystem.onDeathEvent += source =>
+            {
+                // This code runs on the object that gets killed
+                
+                Debug.Log($"Murderer! {gameObject} was murdered by {source}");
+                
+                LevelSystemBehaviour sourceLvSysBehaviour = default;
+
+                if (!ReferenceEquals(sourceLvSysBehaviour = source.GetComponent<LevelSystemBehaviour>(), null))
+                {
+                    var sourceLvSystem = sourceLvSysBehaviour.LevelSystem;
+                    var lifeExpValue = LevelSystem.CalculateLifeExperienceValue(LevelSystem.CurLevel,
+                        statsSystem.Entity.LifeValueExpMultiplier);
+                    
+                    Debug.Log($"Value of {gameObject.name}'s life in experience points: {lifeExpValue}");
+                    
+                    sourceLvSystem.AddExp(lifeExpValue);
+                }
+            };
+        }
+
         private List<StatBase> GetRequiredStatsFromStatTypes()
         {
             List<StatBase> statsToGrow = new List<StatBase>();
-
+            var statsSys = statsSystem.StatsSystem;
+            
             foreach (var statType in statTypesToGrow)
             {
-                statsToGrow.Add(statsSystem.StatsSystem.GetStat(statType));
+                statsToGrow.Add(statsSys.GetStat(statType));
             }
 
             return statsToGrow;
         }
 
+        [Space(10), Header("Debug"), Space(10)]
         #region Debug
         [SerializeField] private int expToGive = default;
 

@@ -10,14 +10,24 @@ namespace StatSystem.TakeOne
 
         public HealthSystem HealthSystem => healthSystem;
 
-        private void Awake()
+        private void Start()
         {
             healthSystem.Init(statsSysBehaviour.StatsSystem);
+
+            healthSystem.onDeathEvent += (g) => gameObject.SetActive(false);
         }
 
         private void Update()
         {
-            healthSystem.Tick();
+            HealthSystem.Tick();
         }
+        
+        #region debug
+        [ContextMenu("Dump health system data")]
+        public void DumpHealthSystemData()
+        {
+            Debug.Log(HealthSystem.ToString());
+        }
+        #endregion
     }
 }

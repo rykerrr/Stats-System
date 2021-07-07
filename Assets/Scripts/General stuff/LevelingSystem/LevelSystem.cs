@@ -16,8 +16,8 @@ namespace DapperScripts.LevelingSystem
         private int requiredExp = 0;
         private int curExp = 0;
 
-        public float LevelExpPercentage => (float)curExp / requiredExp;
-        public int CurLevel => curLevel;
+        public float LevelExpPercentage => (float)Math.Round((float)curExp / requiredExp, 3) * 100f;
+        public int CurLevel => curLevel; 
         public int CurExp => curExp;
         public int RequiredExp => requiredExp;
         private bool LevelUpAvailable => curExp >= requiredExp;
@@ -58,7 +58,6 @@ namespace DapperScripts.LevelingSystem
                     stat.GrowByGrowthRate();
                 }
                 
-                Debug.Log("Level up!");
                 onLevelUp?.Invoke();
             }
         }
@@ -69,11 +68,11 @@ namespace DapperScripts.LevelingSystem
                                                                    + 2 * curLevel + 1);
         }
 
-        private int CalculateTotalExpRequiredForLevel(int level)
+        private static int CalculateTotalExpRequiredForLevel(int level)
         {
-            int expSum = 0;
+            var expSum = 0;
 
-            for (int i = 0; i < level; i++)
+            for (var i = 0; i < level; i++)
             {
                 expSum += Mathf.RoundToInt(0.04f * Mathf.Pow(i, 3) + 0.8f * i
                                                                           + 2 * i + 1);
@@ -82,10 +81,15 @@ namespace DapperScripts.LevelingSystem
             return expSum;
         }
 
+        public static int CalculateLifeExperienceValue(int level, float entityLifeValueMultiplier)
+        {
+            return Mathf.RoundToInt(level * entityLifeValueMultiplier);
+        }
+
         public override string ToString()
         {
             return
-                $"Level: {CurLevel} | Exp/Required Exp: {CurExp}/{RequiredExp} | Exp/ReqExp Percentage Wise: {LevelExpPercentage}";
+                $"Level: {CurLevel} | Exp/Required Exp: {CurExp}/{RequiredExp} | Exp/ReqExp Percentage Wise: {LevelExpPercentage}%";
         }
     }
 }

@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Text;
+using DapperScripts.LevelingSystem;
 using UnityEngine;
 using WizardGame.Timers;
 
@@ -8,19 +10,21 @@ namespace StatSystem.TakeOne
     [Serializable]
     public class HealthSystem
     {
-        public event Action onDeathEvent = delegate { };
-
-        private StatsSystem statsSys = default;
+        [SerializeField] private int curHealth = default;
+        
+        public event Action<GameObject> onDeathEvent = delegate { };
+        
         private DownTimer healTimer = default;
+        private StatsSystem statsSys = default;
         private StatBase maxHealthStat = default;
         private StatBase vigorStat = default;
         private StatBase resolveStat = default;
         
-        [SerializeField] private int curHealth = default;
-        private bool hasDied = default;
-        
         public int CurHealth => curHealth;
 
+        private bool hasDied = default;
+        
+        private StringBuilder sb;
         private HealthSystem(StatsSystem statsSys)
         {
             Init(statsSys);
@@ -28,6 +32,8 @@ namespace StatSystem.TakeOne
 
         public void Init(StatsSystem statsSys)
         {
+            sb = new StringBuilder();
+            
             this.statsSys = statsSys;
             
             maxHealthStat = this.statsSys.GetStat(StatTypeDB.GetType("MaxHealth"));
@@ -52,14 +58,15 @@ namespace StatSystem.TakeOne
             healTimer.TryTick(Time.deltaTime);
         }
 
-        public void TakeDamage(int dmg, object source)
+        public void TakeDamage(int dmg, GameObject damageSource = null)
         {
             curHealth = Mathf.Clamp(curHealth - dmg, 0, maxHealthStat.ActualValue);
             healTimer.Reset();
             
             if (!hasDied && curHealth == 0)
             {
-                Death();
+                // Exp gain functions by last hit due to this
+                Death(damageSource);
             }
         }
 
@@ -70,10 +77,24 @@ namespace StatSystem.TakeOne
             curHealth = Mathf.Clamp(curHealth + hp, 0, maxHealthStat.ActualValue);
         }
         
-        private void Death()
+        private void Death(GameObject source = null)
         {
             hasDied = true;
-            onDeathEvent?.Invoke();
+            
+            onDeathEvent?.Invoke(source);
+        }
+
+        public override string ToString()
+        {
+            // cur health / max health | curhp/maxhp percentage | next heal time
+            
+            sb.Clear();
+            sb.Append("Health/MaxHealth: ").Append(CurHealth).Append("/").Append(maxHealthStat.ActualValue).AppendLine();
+            sb.Append("Health Percentage: ").Append(Math.Round((float) CurHealth / maxHealthStat.ActualValue, 3) * 100f)
+                .Append("%").AppendLine();
+            sb.Append("Next heal in: ").Append(healTimer.Time).AppendLine();
+
+            return sb.ToString();
         }
     }
 }

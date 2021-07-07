@@ -12,10 +12,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e9a6c3860a9535a40bda2a0d21c056ce, type: 3}
   m_Name: Big Chungus
   m_EditorClassIdentifier: 
+  lifeValueExpMultiplier: 1.7
   defaultEntityStats:
-  - name: MaxHealth
-    statType: {fileID: 11400000, guid: 41a576c8368bdb04993cd8256d036876, type: 2}
-    growthRate: 1
   - name: Vigor
     statType: {fileID: 11400000, guid: c12a3daaef016ca448021bbc27b3b0cd, type: 2}
-    growthRate: 1
+    growthRate: 1.3
+  - name: Resolve
+    statType: {fileID: 11400000, guid: faea2fb0e0f5dd943b81c6fe39e150e1, type: 2}
+    growthRate: 1.2
+  - name: MaxHealth
+    statType: {fileID: 11400000, guid: 41a576c8368bdb04993cd8256d036876, type: 2}
+    growthRate: 1.4

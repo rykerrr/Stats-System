@@ -14,7 +14,6 @@ namespace StatSystem.TakeOne
         protected virtual void OnValidate()
         {
             var assetPath = AssetDatabase.GetAssetPath(this.GetInstanceID());
-            // Debug.Log(assetPath);
             Name = Path.GetFileNameWithoutExtension(assetPath);
         }
         

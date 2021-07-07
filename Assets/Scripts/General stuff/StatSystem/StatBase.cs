@@ -22,14 +22,11 @@ namespace StatSystem.TakeOne
             get => statWasModified;
             set => statWasModified = value;
         }
-
-        // Can be made private
-        // TODO: look at why it was kept as public though my only assumption is that it's for the level system
-        // and we don't need that setup anymore
+        
         public int BaseValue
         {
             get => baseValue;
-            set
+            protected set
             {
                 baseValue = value;
 
@@ -111,7 +108,10 @@ namespace StatSystem.TakeOne
 
         public void GrowByGrowthRate()
         {
-            BaseValue += Mathf.RoundToInt(OriginalValue * GrowthRate);
+            var rand = new System.Random();
+            var randMult = (float)rand.NextDouble();
+            
+            BaseValue += Mathf.RoundToInt(OriginalValue * GrowthRate + OriginalValue * randMult);
         }
         
         public void AddModifier(StatModifier mod)
