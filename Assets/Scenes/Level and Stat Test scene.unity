@@ -234,7 +234,7 @@ GameObject:
   - component: {fileID: 477209410}
   - component: {fileID: 477209409}
   m_Layer: 0
-  m_Name: Kyub Mofo
+  m_Name: NPC Cube Test
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -253,9 +253,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   statsToInject: {fileID: 11400000, guid: c8126f5866ce97942b8f4c50c5e29d1f, type: 2}
-  statsSystem:
-    stats:
-      keys: []
   key: {fileID: 0}
   modifierToAddOrRemove:
     type: 0
@@ -384,7 +381,7 @@ GameObject:
   - component: {fileID: 574873326}
   - component: {fileID: 574873325}
   m_Layer: 0
-  m_Name: Kyub Mofo
+  m_Name: NPC Cube Test
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -403,9 +400,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   statsToInject: {fileID: 11400000, guid: c8126f5866ce97942b8f4c50c5e29d1f, type: 2}
-  statsSystem:
-    stats:
-      keys: []
   key: {fileID: 0}
   modifierToAddOrRemove:
     type: 0
@@ -732,9 +726,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   statsToInject: {fileID: 11400000, guid: 9bdb1f57338640a4e9d2c9214d9670f1, type: 2}
-  statsSystem:
-    stats:
-      keys: []
   key: {fileID: 11400000, guid: e1d0d8bd835ac9d449a08d07e0daeb62, type: 2}
   modifierToAddOrRemove:
     type: 100
@@ -924,7 +915,7 @@ GameObject:
   - component: {fileID: 1684362082}
   - component: {fileID: 1684362081}
   m_Layer: 0
-  m_Name: Kyub Mofo
+  m_Name: NPC Cube Test
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -943,9 +934,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   statsToInject: {fileID: 11400000, guid: c8126f5866ce97942b8f4c50c5e29d1f, type: 2}
-  statsSystem:
-    stats:
-      keys: []
   key: {fileID: 0}
   modifierToAddOrRemove:
     type: 0
@@ -1074,7 +1062,7 @@ GameObject:
   - component: {fileID: 1930598817}
   - component: {fileID: 1930598816}
   m_Layer: 0
-  m_Name: Kyub Mofo
+  m_Name: NPC Cube Test
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1093,9 +1081,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   statsToInject: {fileID: 11400000, guid: c8126f5866ce97942b8f4c50c5e29d1f, type: 2}
-  statsSystem:
-    stats:
-      keys: []
   key: {fileID: 0}
   modifierToAddOrRemove:
     type: 0
@@ -1224,7 +1209,7 @@ GameObject:
   - component: {fileID: 2079063079}
   - component: {fileID: 2079063078}
   m_Layer: 0
-  m_Name: Kyub Mofo
+  m_Name: NPC Cube Test
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1243,9 +1228,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   statsToInject: {fileID: 11400000, guid: c8126f5866ce97942b8f4c50c5e29d1f, type: 2}
-  statsSystem:
-    stats:
-      keys: []
   key: {fileID: 0}
   modifierToAddOrRemove:
     type: 0
